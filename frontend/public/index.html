@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OS Process Lifecycle Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ['"Space Mono"', 'monospace'],
+              display: ['Syne', 'sans-serif'],
+            },
+            colors: {
+              bg: '#0a0e1a',
+              panel: '#111827',
+              border: '#1e2d40',
+              accent: '#00e5ff',
+              accent2: '#ff6b35',
+              accent3: '#a855f7',
+              success: '#22d3ee',
+              warn: '#fbbf24',
+              danger: '#f87171',
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
+              'slide-in': 'slideIn 0.3s ease-out',
+              'fade-in': 'fadeIn 0.4s ease-out',
+            },
+            keyframes: {
+              slideIn: { from: { opacity: 0, transform: 'translateY(-8px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+              fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+      body { background: #0a0e1a; color: #e2e8f0; font-family: 'Syne', sans-serif; margin: 0; }
+      ::-webkit-scrollbar { width: 4px; height: 4px; }
+      ::-webkit-scrollbar-track { background: #111827; }
+      ::-webkit-scrollbar-thumb { background: #1e2d40; border-radius: 2px; }
+      .glow-cyan { box-shadow: 0 0 20px rgba(0,229,255,0.15); }
+      .glow-orange { box-shadow: 0 0 20px rgba(255,107,53,0.15); }
+      .state-badge { font-family: 'Space Mono', monospace; font-size: 0.65rem; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.05em; }
+      .gantt-bar { transition: opacity 0.2s; }
+      .gantt-bar:hover { opacity: 0.8; filter: brightness(1.2); }
+      input[type=range] { accent-color: #00e5ff; }
+      input[type=number], select { background: #0a0e1a; border: 1px solid #1e2d40; color: #e2e8f0; border-radius: 6px; padding: 6px 10px; font-family: 'Space Mono', monospace; font-size: 0.8rem; width: 100%; outline: none; transition: border-color 0.2s; }
+      input[type=number]:focus, select:focus { border-color: #00e5ff; }
+      .process-row { animation: slideIn 0.3s ease-out; }
+      @keyframes slideIn { from { opacity:0; transform: translateX(-10px); } to { opacity:1; transform:translateX(0); } }
+      @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+      .tooltip { position: fixed; pointer-events: none; z-index: 100; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </body>
+</html>
